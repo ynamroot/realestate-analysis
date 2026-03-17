@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-01-PLAN.md — Phase 2 Wave 0 test scaffold
-last_updated: "2026-03-17T23:11:38.478Z"
+stopped_at: Completed 02-02-PLAN.md — Phase 2 normalizer pure functions
+last_updated: "2026-03-17T23:14:43.061Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 9
-  completed_plans: 5
+  completed_plans: 6
   percent: 25
 ---
 
@@ -55,6 +55,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 01-foundation P03 | 3 | 1 tasks | 1 files |
 | Phase 01-foundation P04 | 2 | 1 tasks | 1 files |
 | Phase 02-molit-data-collection P01 | 2 | 2 tasks | 4 files |
+| Phase 02-molit-data-collection P02 | 90s | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,7 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: _check_result_code treats 00/0000/000 as success; all other resultCode values are API errors
 - [Phase 02-molit-data-collection]: Module-level init_db import safe in Phase 2 test file because schema.py exists from Phase 1; xfail only needed for Wave-1 modules
 - [Phase 02-molit-data-collection]: pythonpath=['.'] added to pyproject.toml pytest config — bare pytest now resolves pipeline/ package without needing python -m pytest
+- [Phase 02-molit-data-collection]: Normalizer functions copied verbatim from 02-RESEARCH.md patterns — no deviations needed
 
 ### Pending Todos
 
@@ -91,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T23:11:38.474Z
-Stopped at: Completed 02-01-PLAN.md — Phase 2 Wave 0 test scaffold
+Last session: 2026-03-17T23:14:43.057Z
+Stopped at: Completed 02-02-PLAN.md — Phase 2 normalizer pure functions
 Resume file: None
