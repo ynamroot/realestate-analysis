@@ -28,7 +28,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. MOLIT API 클라이언트가 serviceKey를 URL에 직접 embed하여 401 없이 XML 응답을 받는다
   3. 5개 지역(서울 자치구, 분당구, 과천시, 위례, 인덕원) LAWD_CD가 코드에 매핑되어 있다
   4. 동일 (lawd_cd, deal_ym, data_type) 조합을 두 번 수집하면 두 번째는 스킵된다
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Test scaffold: conftest.py + 9 failing test stubs (Wave 0)
+- [ ] 01-02-PLAN.md — package skeleton + schema.py (init_db) + idempotency.py (Wave 1)
+- [ ] 01-03-PLAN.md — region config: PIPELINE_REGIONS 29 LAWD_CDs (Wave 1, parallel)
+- [ ] 01-04-PLAN.md — MOLIT API client: MolitClient + pagination + resultCode check (Wave 2)
 
 ### Phase 2: MOLIT Data Collection
 **Goal**: 5개 지역 전체 아파트의 2006년~현재 매매·전세 실거래가와 건물정보가 SQLite에 완전히 적재된다
@@ -71,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/4 | Not started | - |
 | 2. MOLIT Data Collection | 0/TBD | Not started | - |
 | 3. Geospatial + Subway Graph | 0/TBD | Not started | - |
 | 4. CLI + Analysis Views | 0/TBD | Not started | - |
