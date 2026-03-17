@@ -686,35 +686,59 @@ def get_region_name(sido_code: str, sigungu_code: str = None):
     return f"{sido_name} {sigungu_name}"
 
 def find_region_code_by_address(address: str):
-    """도로명 주소를 기반으로 지역 코드를 찾아 반환"""
-    # 주소를 공백으로 분리
+    """
+    주소 문자열에서 (시도코드 2자리, 시군구코드 5자리) 반환.
+
+    개선사항:
+    - "수원시 영통구"처럼 2토큰 시군구 매칭 지원
+    - 시도 코드 확인 후 해당 시도 내에서만 시군구 검색 (중구 등 중복명 오매칭 방지)
+    - 완전 일치 우선, 부분 일치 후순위
+    """
     parts = address.strip().split()
-    
+
     if len(parts) < 2:
         return None, None
-    
-    sido_name = parts[0]  # 첫 번째 부분은 시도명
-    sigungu_name = parts[1]  # 두 번째 부분은 시군구명
-    
+
+    sido_name = parts[0]
+
     # 시도 코드 찾기
     sido_code = None
     for code, name in SIDO_CODES.items():
-        if sido_name in name or name in sido_name:
+        if sido_name == name or sido_name in name:
             sido_code = code
             break
-    
+
     if not sido_code:
         return None, None
-    
-    # 시군구 코드 찾기
+
+    # 시군구 코드 찾기 (해당 시도 내에서만)
     sigungu_code = None
     if sido_code in ALL_SIGUNGU:
         sigungu_dict = ALL_SIGUNGU[sido_code]
-        for code, name in sigungu_dict.items():
-            if sigungu_name in name or name in sigungu_name:
-                sigungu_code = code
-                break
-    
+
+        # 1차: 두 번째 + 세 번째 토큰 합쳐서 완전 일치 시도 (예: "수원시 영통구")
+        if len(parts) >= 3:
+            combined = f"{parts[1]} {parts[2]}"
+            for code, name in sigungu_dict.items():
+                if combined == name:
+                    sigungu_code = code
+                    break
+
+        # 2차: 두 번째 토큰 완전 일치
+        if not sigungu_code:
+            for code, name in sigungu_dict.items():
+                if parts[1] == name:
+                    sigungu_code = code
+                    break
+
+        # 3차: 부분 일치 (폴백)
+        if not sigungu_code:
+            sigungu_name = parts[1]
+            for code, name in sigungu_dict.items():
+                if sigungu_name in name:
+                    sigungu_code = code
+                    break
+
     return sido_code, sigungu_code
 
 def parse_road_address(address: str):
