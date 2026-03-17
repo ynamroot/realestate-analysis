@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-02-PLAN.md — Phase 2 normalizer pure functions
-last_updated: "2026-03-17T23:14:43.061Z"
+stopped_at: Completed 02-03-PLAN.md — Phase 2 storage repository functions
+last_updated: "2026-03-17T23:17:06.858Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 9
-  completed_plans: 6
+  completed_plans: 7
   percent: 25
 ---
 
@@ -56,6 +56,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 01-foundation P04 | 2 | 1 tasks | 1 files |
 | Phase 02-molit-data-collection P01 | 2 | 2 tasks | 4 files |
 | Phase 02-molit-data-collection P02 | 90s | 1 tasks | 1 files |
+| Phase 02-molit-data-collection P03 | 2m | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,8 @@ Recent decisions affecting current work:
 - [Phase 02-molit-data-collection]: Module-level init_db import safe in Phase 2 test file because schema.py exists from Phase 1; xfail only needed for Wave-1 modules
 - [Phase 02-molit-data-collection]: pythonpath=['.'] added to pyproject.toml pytest config — bare pytest now resolves pipeline/ package without needing python -m pytest
 - [Phase 02-molit-data-collection]: Normalizer functions copied verbatim from 02-RESEARCH.md patterns — no deviations needed
+- [Phase 02-molit-data-collection]: upsert_apartment does not commit — caller owns transaction boundary for batch efficiency
+- [Phase 02-molit-data-collection]: upsert_building_info propagates authoritative HouseInfo build_year to apartments.build_year via UPDATE
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T23:14:43.057Z
-Stopped at: Completed 02-02-PLAN.md — Phase 2 normalizer pure functions
+Last session: 2026-03-17T23:17:06.853Z
+Stopped at: Completed 02-03-PLAN.md — Phase 2 storage repository functions
 Resume file: None
