@@ -1,0 +1,106 @@
+# Requirements: 부동산 데이터 수집 파이프라인
+
+**Defined:** 2026-03-17
+**Core Value:** 지정 지역 전체 아파트의 시세·교통·건물 정보를 하나의 SQLite DB에 통합하여, pandas 분석과 향후 대시보드 연동이 즉시 가능한 상태로 유지한다.
+
+## v1 Requirements
+
+### Foundation (기반 인프라)
+
+- [ ] **FOUND-01**: SQLite DB 초기화 — apartments, monthly_prices, building_info, subway_distances, commute_stops, collection_log 6개 테이블 + 인덱스 생성
+- [ ] **FOUND-02**: MOLIT API 기반 클라이언트 — serviceKey URL-embed 패턴, HTTP-200 에러 body 파싱, 페이지네이션 (기존 realestate_csv.py 로직 계승)
+- [ ] **FOUND-03**: 지역 설정 — 서울 전체 자치구, 성남시 분당구, 과천시, 하남시(위례), 안양시 동안구(인덕원) LAWD_CD 매핑
+- [ ] **FOUND-04**: collection_log 멱등성 — 동일 (lawd_cd × deal_ym × data_type) 재수집 방지
+
+### 실거래가/전세가 수집
+
+- [ ] **PRICE-01**: 지역구별 전체 아파트 월별 매매 실거래 수집 (2006년~현재), SQLite apartments + monthly_prices 적재
+- [ ] **PRICE-02**: 지역구별 전체 아파트 월별 전세 실거래 수집 (2006년~현재), monthly_prices 적재
+- [ ] **PRICE-03**: 평형(전용면적 구간)별 월별 집계 — 거래건수, 최저가, 최고가, 평균가
+- [ ] **PRICE-04**: dealAmount 쉼표 제거, excluUseAr float 변환, dealMonth zero-padding 정규화
+
+### 건물 정보 수집
+
+- [ ] **BLDG-01**: 국토교통부 HouseInfo API로 각 아파트 건폐율, 건축년도, 용적률, 세대수, 주차대수 수집
+- [ ] **BLDG-02**: building_info 테이블에 apartment_id FK로 연결하여 적재
+
+### 지하철 거리 수집
+
+- [ ] **SUBW-01**: Naver Maps API(도보 경로)로 각 아파트에서 반경 1km 이내 지하철역 거리 수집
+- [ ] **SUBW-02**: 호선별로 분리하여 subway_distances 테이블 적재 (1km 초과 시 null)
+- [ ] **SUBW-03**: Naver API 응답 캐싱 — 동일 아파트 재요청 방지 (rate limit 1 req/sec)
+
+### 정거장 수 계산 (GBD/CBD/YBD)
+
+- [ ] **COMM-01**: 전국 지하철 노선 그래프 내장 (서울 GTFS 기반, GTX-A 포함) — networkx BFS
+- [ ] **COMM-02**: 각 아파트 최근접역에서 GBD 대표역(강남/역삼/선릉/삼성)까지 최단 정거장 수 (환승 포함)
+- [ ] **COMM-03**: 각 아파트 최근접역에서 CBD 대표역(광화문/종각/을지로입구/시청)까지 최단 정거장 수 (환승 포함)
+- [ ] **COMM-04**: 각 아파트 최근접역에서 YBD 대표역(여의도/국회의사당/여의나루)까지 최단 정거장 수 (환승 포함)
+- [ ] **COMM-05**: commute_stops 테이블에 업무지구별 최단값 적재
+
+### CLI + 출력
+
+- [ ] **CLI-01**: Typer 기반 CLI — `collect`, `export`, `status` 서브커맨드
+- [ ] **CLI-02**: 수집 대상(지역, 기간, 데이터 유형) 옵션 선택 가능
+- [ ] **CLI-03**: pandas `read_sql()` + `to_csv(encoding='utf-8-sig')` 엑셀 호환 CSV 내보내기
+- [ ] **CLI-04**: 분석용 SQLite VIEW — 아파트별 최신 시세, 전세가율, 업무지구 접근성 통합 뷰
+
+## v2 Requirements
+
+### 자동화
+
+- **AUTO-01**: 월 1회 신규 실거래 자동 수집 (cron/스케줄러)
+- **AUTO-02**: 수집 완료 알림 (이메일/Slack)
+
+### 확장
+
+- **EXT-01**: 대시보드 웹 UI 연동 (FastAPI + 기존 A2A 에이전트)
+- **EXT-02**: 수집 지역 확장 (서울/경기 전체)
+- **EXT-03**: 개별 거래 기록 저장 (현재는 월별 집계만)
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| 스케줄링/크론 자동화 | v1은 수동 CLI 실행, 이후 추가 |
+| 웹 대시보드 구현 | 데이터 수집 완료 후 별도 프로젝트 |
+| 실시간 시세 | 월별 배치로 충분, API 비용 절감 |
+| 서울/경기 5개 권역 외 지역 | 명시적 범위 한정 |
+| 개별 거래 레코드 저장 | 월별 집계로 DB 크기 관리 (~50MB) |
+| FastAPI A2A 기능 확장 | 별도 독립 파이프라인으로 분리 |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| PRICE-01 | Phase 2 | Pending |
+| PRICE-02 | Phase 2 | Pending |
+| PRICE-03 | Phase 2 | Pending |
+| PRICE-04 | Phase 2 | Pending |
+| BLDG-01 | Phase 3 | Pending |
+| BLDG-02 | Phase 3 | Pending |
+| SUBW-01 | Phase 4 | Pending |
+| SUBW-02 | Phase 4 | Pending |
+| SUBW-03 | Phase 4 | Pending |
+| COMM-01 | Phase 5 | Pending |
+| COMM-02 | Phase 5 | Pending |
+| COMM-03 | Phase 5 | Pending |
+| COMM-04 | Phase 5 | Pending |
+| COMM-05 | Phase 5 | Pending |
+| CLI-01 | Phase 6 | Pending |
+| CLI-02 | Phase 6 | Pending |
+| CLI-03 | Phase 6 | Pending |
+| CLI-04 | Phase 6 | Pending |
+
+**Coverage:**
+- v1 requirements: 22 total
+- Mapped to phases: 22
+- Unmapped: 0 ✓
+
+---
+*Requirements defined: 2026-03-17*
+*Last updated: 2026-03-17 after initial definition*
