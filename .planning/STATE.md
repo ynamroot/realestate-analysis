@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-03-PLAN.md — PIPELINE_REGIONS with 29 LAWD_CD mappings GREEN
-last_updated: "2026-03-17T06:55:53.474Z"
+stopped_at: Completed 01-04-PLAN.md — MolitClient MOLIT API client GREEN
+last_updated: "2026-03-17T06:56:58.079Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
   percent: 25
 ---
 
@@ -53,6 +53,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 01-foundation P01 | 6 | 2 tasks | 2 files |
 | Phase 01 P02 | 7 | 3 tasks | 8 files |
 | Phase 01-foundation P03 | 3 | 1 tasks | 1 files |
+| Phase 01-foundation P04 | 2 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 01]: pyproject.toml [tool.setuptools.packages.find] added for pipeline/ discoverability alongside app/
 - [Phase 01-foundation]: PIPELINE_REGIONS is the single source of truth for 29 pipeline districts — no dynamic lookup
 - [Phase 01-foundation]: LAWD_CD values cross-verified against realestate_csv.py SIGUNGU_MAP and app/data/region_codes.py
+- [Phase 01-foundation]: serviceKey embedded in URL string, never via params={} to avoid httpx double-encoding
+- [Phase 01-foundation]: _check_result_code treats 00/0000/000 as success; all other resultCode values are API errors
 
 ### Pending Todos
 
@@ -85,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T06:55:53.469Z
-Stopped at: Completed 01-03-PLAN.md — PIPELINE_REGIONS with 29 LAWD_CD mappings GREEN
+Last session: 2026-03-17T06:56:58.075Z
+Stopped at: Completed 01-04-PLAN.md — MolitClient MOLIT API client GREEN
 Resume file: None
