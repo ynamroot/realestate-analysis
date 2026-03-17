@@ -7,10 +7,10 @@
 
 ### Foundation (기반 인프라)
 
-- [ ] **FOUND-01**: SQLite DB 초기화 — apartments, monthly_prices, building_info, subway_distances, commute_stops, collection_log 6개 테이블 + 인덱스 생성
-- [ ] **FOUND-02**: MOLIT API 기반 클라이언트 — serviceKey URL-embed 패턴, HTTP-200 에러 body 파싱, 페이지네이션 (기존 realestate_csv.py 로직 계승)
-- [ ] **FOUND-03**: 지역 설정 — 서울 전체 자치구, 성남시 분당구, 과천시, 하남시(위례), 안양시 동안구(인덕원) LAWD_CD 매핑
-- [ ] **FOUND-04**: collection_log 멱등성 — 동일 (lawd_cd × deal_ym × data_type) 재수집 방지
+- [x] **FOUND-01**: SQLite DB 초기화 — apartments, monthly_prices, building_info, subway_distances, commute_stops, collection_log 6개 테이블 + 인덱스 생성
+- [x] **FOUND-02**: MOLIT API 기반 클라이언트 — serviceKey URL-embed 패턴, HTTP-200 에러 body 파싱, 페이지네이션 (기존 realestate_csv.py 로직 계승)
+- [x] **FOUND-03**: 지역 설정 — 서울 전체 자치구, 성남시 분당구, 과천시, 하남시(위례), 안양시 동안구(인덕원) LAWD_CD 매핑
+- [x] **FOUND-04**: collection_log 멱등성 — 동일 (lawd_cd × deal_ym × data_type) 재수집 방지
 
 ### 실거래가/전세가 수집
 
@@ -73,10 +73,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
+| FOUND-04 | Phase 1 | Complete |
 | PRICE-01 | Phase 2 | Pending |
 | PRICE-02 | Phase 2 | Pending |
 | PRICE-03 | Phase 2 | Pending |

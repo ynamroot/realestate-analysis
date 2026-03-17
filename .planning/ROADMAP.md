@@ -77,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/4 | Not started | - |
+| 1. Foundation | 1/4 | In Progress|  |
 | 2. MOLIT Data Collection | 0/TBD | Not started | - |
 | 3. Geospatial + Subway Graph | 0/TBD | Not started | - |
 | 4. CLI + Analysis Views | 0/TBD | Not started | - |
