@@ -46,7 +46,14 @@ Plans:
   3. `SELECT * FROM monthly_prices WHERE deal_type='rent'` 가 동기간 전세 집계 데이터를 포함한다
   4. `SELECT build_year, total_households FROM apartments WHERE build_year IS NOT NULL` 으로 건물정보가 확인된다
   5. dealAmount 쉼표, excluUseAr float 변환, dealMonth zero-padding이 모두 정규화된 상태로 저장된다
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Test scaffold: 12 test stubs + package __init__.py markers (Wave 0)
+- [ ] 02-02-PLAN.md — Normalizer/aggregator pure functions: normalize_trade_item, normalize_rent_item, aggregate_monthly, get_month_range (Wave 1)
+- [ ] 02-03-PLAN.md — Storage repository: upsert_apartment, insert_monthly_prices, upsert_building_info (Wave 1, parallel)
+- [ ] 02-04-PLAN.md — Trade/rent collector loop: collect_district + collect_all_regions (Wave 2)
+- [ ] 02-05-PLAN.md — Building info collector: collect_building_info + collect_all_building_info (Wave 2, parallel)
 
 ### Phase 3: Geospatial + Subway Graph
 **Goal**: 각 아파트에서 반경 1km 이내 지하철역까지의 실제 도보거리와 GBD/CBD/YBD까지의 최단 정거장 수가 계산되어 DB에 존재한다
@@ -78,6 +85,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-17 |
-| 2. MOLIT Data Collection | 0/TBD | Not started | - |
+| 2. MOLIT Data Collection | 0/5 | Not started | - |
 | 3. Geospatial + Subway Graph | 0/TBD | Not started | - |
 | 4. CLI + Analysis Views | 0/TBD | Not started | - |
