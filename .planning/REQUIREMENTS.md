@@ -14,15 +14,15 @@
 
 ### 실거래가/전세가 수집
 
-- [ ] **PRICE-01**: 지역구별 전체 아파트 월별 매매 실거래 수집 (2006년~현재), SQLite apartments + monthly_prices 적재
-- [ ] **PRICE-02**: 지역구별 전체 아파트 월별 전세 실거래 수집 (2006년~현재), monthly_prices 적재
-- [ ] **PRICE-03**: 평형(전용면적 구간)별 월별 집계 — 거래건수, 최저가, 최고가, 평균가
-- [ ] **PRICE-04**: dealAmount 쉼표 제거, excluUseAr float 변환, dealMonth zero-padding 정규화
+- [x] **PRICE-01**: 지역구별 전체 아파트 월별 매매 실거래 수집 (2006년~현재), SQLite apartments + monthly_prices 적재
+- [x] **PRICE-02**: 지역구별 전체 아파트 월별 전세 실거래 수집 (2006년~현재), monthly_prices 적재
+- [x] **PRICE-03**: 평형(전용면적 구간)별 월별 집계 — 거래건수, 최저가, 최고가, 평균가
+- [x] **PRICE-04**: dealAmount 쉼표 제거, excluUseAr float 변환, dealMonth zero-padding 정규화
 
 ### 건물 정보 수집
 
-- [ ] **BLDG-01**: 국토교통부 HouseInfo API로 각 아파트 건폐율, 건축년도, 용적률, 세대수, 주차대수 수집
-- [ ] **BLDG-02**: building_info 테이블에 apartment_id FK로 연결하여 적재
+- [x] **BLDG-01**: 국토교통부 HouseInfo API로 각 아파트 건폐율, 건축년도, 용적률, 세대수, 주차대수 수집
+- [x] **BLDG-02**: building_info 테이블에 apartment_id FK로 연결하여 적재
 
 ### 지하철 거리 수집
 
@@ -77,12 +77,12 @@
 | FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
-| PRICE-01 | Phase 2 | Pending |
-| PRICE-02 | Phase 2 | Pending |
-| PRICE-03 | Phase 2 | Pending |
-| PRICE-04 | Phase 2 | Pending |
-| BLDG-01 | Phase 2 | Pending |
-| BLDG-02 | Phase 2 | Pending |
+| PRICE-01 | Phase 2 | Complete |
+| PRICE-02 | Phase 2 | Complete |
+| PRICE-03 | Phase 2 | Complete |
+| PRICE-04 | Phase 2 | Complete |
+| BLDG-01 | Phase 2 | Complete |
+| BLDG-02 | Phase 2 | Complete |
 | SUBW-01 | Phase 3 | Pending |
 | SUBW-02 | Phase 3 | Pending |
 | SUBW-03 | Phase 3 | Pending |
