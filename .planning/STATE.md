@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-01-PLAN.md
-last_updated: "2026-03-17T06:46:26.207Z"
+stopped_at: Completed 01-02-PLAN.md — pipeline skeleton + schema + idempotency GREEN
+last_updated: "2026-03-17T06:52:22.064Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 4
-  completed_plans: 1
+  completed_plans: 2
   percent: 25
 ---
 
@@ -51,6 +51,7 @@ Progress: [███░░░░░░░] 25%
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 6 | 2 tasks | 2 files |
+| Phase 01 P02 | 7 | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -64,6 +65,9 @@ Recent decisions affecting current work:
 - [Init]: pipeline/ 패키지를 app/과 완전 분리 — A2A 에이전트 기능 영향 없음
 - [Init]: BFS 정거장 수는 networkx + GTFS 기반 — 기존 35개 하드코딩 stub 대체 필요
 - [Phase 01-foundation]: Import pipeline modules inside test function bodies so test file is importable before pipeline/ package exists
+- [Phase 01]: Schema copied verbatim from 01-RESEARCH.md Pattern 1 without modification
+- [Phase 01]: INSERT OR IGNORE with UNIQUE(lawd_cd, deal_ym, data_type) enforces DB-level deduplication for collection_log
+- [Phase 01]: pyproject.toml [tool.setuptools.packages.find] added for pipeline/ discoverability alongside app/
 
 ### Pending Todos
 
@@ -78,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T06:46:26.203Z
-Stopped at: Completed 01-foundation-01-PLAN.md
+Last session: 2026-03-17T06:52:22.059Z
+Stopped at: Completed 01-02-PLAN.md — pipeline skeleton + schema + idempotency GREEN
 Resume file: None
