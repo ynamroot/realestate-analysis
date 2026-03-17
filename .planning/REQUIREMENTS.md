@@ -81,26 +81,26 @@
 | PRICE-02 | Phase 2 | Pending |
 | PRICE-03 | Phase 2 | Pending |
 | PRICE-04 | Phase 2 | Pending |
-| BLDG-01 | Phase 3 | Pending |
-| BLDG-02 | Phase 3 | Pending |
-| SUBW-01 | Phase 4 | Pending |
-| SUBW-02 | Phase 4 | Pending |
-| SUBW-03 | Phase 4 | Pending |
-| COMM-01 | Phase 5 | Pending |
-| COMM-02 | Phase 5 | Pending |
-| COMM-03 | Phase 5 | Pending |
-| COMM-04 | Phase 5 | Pending |
-| COMM-05 | Phase 5 | Pending |
-| CLI-01 | Phase 6 | Pending |
-| CLI-02 | Phase 6 | Pending |
-| CLI-03 | Phase 6 | Pending |
-| CLI-04 | Phase 6 | Pending |
+| BLDG-01 | Phase 2 | Pending |
+| BLDG-02 | Phase 2 | Pending |
+| SUBW-01 | Phase 3 | Pending |
+| SUBW-02 | Phase 3 | Pending |
+| SUBW-03 | Phase 3 | Pending |
+| COMM-01 | Phase 3 | Pending |
+| COMM-02 | Phase 3 | Pending |
+| COMM-03 | Phase 3 | Pending |
+| COMM-04 | Phase 3 | Pending |
+| COMM-05 | Phase 3 | Pending |
+| CLI-01 | Phase 4 | Pending |
+| CLI-02 | Phase 4 | Pending |
+| CLI-03 | Phase 4 | Pending |
+| CLI-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 22 total
 - Mapped to phases: 22
-- Unmapped: 0 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after initial definition*
+*Last updated: 2026-03-17 — traceability updated to 4-phase coarse roadmap (BLDG merged into Phase 2, SUBW+COMM merged into Phase 3)*
