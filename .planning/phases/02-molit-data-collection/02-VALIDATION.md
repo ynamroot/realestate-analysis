@@ -38,24 +38,31 @@ created: 2026-03-17T07:36:25Z
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 2-01-01 | 01 | 1 | PRICE-01 | unit | `pytest tests/test_pipeline.py::test_trade_pipeline -v` | ❌ W0 | ⬜ pending |
-| 2-01-02 | 01 | 1 | PRICE-02 | unit | `pytest tests/test_pipeline.py::test_rent_pipeline -v` | ❌ W0 | ⬜ pending |
-| 2-01-03 | 01 | 2 | PRICE-03 | unit | `pytest tests/test_pipeline.py::test_all_regions -v` | ❌ W0 | ⬜ pending |
-| 2-01-04 | 01 | 2 | PRICE-04 | unit | `pytest tests/test_pipeline.py::test_normalization -v` | ❌ W0 | ⬜ pending |
-| 2-02-01 | 02 | 1 | BLD-01 | unit | `pytest tests/test_building.py::test_building_fetch -v` | ❌ W0 | ⬜ pending |
-| 2-02-02 | 02 | 2 | BLD-02 | unit | `pytest tests/test_building.py::test_building_match -v` | ❌ W0 | ⬜ pending |
+| 2-01-01 | 01 | 0 | PRICE-03, PRICE-04 | unit | `pytest tests/test_pipeline_phase2.py::test_normalize_trade_deal_amount tests/test_pipeline_phase2.py::test_normalize_trade_exclu_use_ar tests/test_pipeline_phase2.py::test_normalize_trade_deal_month_padding -v` | ❌ W0 | ⬜ pending |
+| 2-01-02 | 01 | 0 | PRICE-04 | unit | `pytest tests/test_pipeline_phase2.py::test_normalize_rent_deposit tests/test_pipeline_phase2.py::test_aggregate_monthly_grouping tests/test_pipeline_phase2.py::test_aggregate_monthly_stats tests/test_pipeline_phase2.py::test_month_range_bounds -v` | ❌ W0 | ⬜ pending |
+| 2-01-03 | 01 | 0 | PRICE-01, PRICE-02 | unit | `pytest tests/test_pipeline_phase2.py::test_upsert_apartment_new tests/test_pipeline_phase2.py::test_upsert_apartment_idempotent tests/test_pipeline_phase2.py::test_insert_monthly_prices_no_dup -v` | ❌ W0 | ⬜ pending |
+| 2-01-04 | 01 | 0 | BLDG-01, BLDG-02 | unit | `pytest tests/test_pipeline_phase2.py::test_upsert_building_info tests/test_pipeline_phase2.py::test_upsert_building_info_replace -v` | ❌ W0 | ⬜ pending |
+| 2-02-01 | 02 | 1 | PRICE-03, PRICE-04 | unit | `pytest tests/test_pipeline_phase2.py -k "normalize or aggregate" -v` | ✅ created W0 | ⬜ pending |
+| 2-03-01 | 03 | 1 | PRICE-01, PRICE-02, BLDG-01, BLDG-02 | unit | `pytest tests/test_pipeline_phase2.py -k "upsert or insert" -v` | ✅ created W0 | ⬜ pending |
+| 2-04-01 | 04 | 2 | PRICE-01, PRICE-02, PRICE-03, PRICE-04 | import | `python -c "from pipeline.collectors.trade_rent import collect_district, collect_all_regions; print('imports OK')"` | ❌ W0 | ⬜ pending |
+| 2-05-01 | 05 | 2 | BLDG-01, BLDG-02 | import | `python -c "from pipeline.collectors.building_info import collect_building_info, collect_all_building_info; print('imports OK')"` | ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Note: Plans 02-04 and 02-05 use import-check verify (collector functions require live network via MolitClient). Behavioral coverage is by proxy via normalizer/repository tests.*
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `tests/test_pipeline.py` — stubs for PRICE-01, PRICE-02, PRICE-03, PRICE-04
-- [ ] `tests/test_building.py` — stubs for BLD-01, BLD-02
-- [ ] `tests/conftest.py` — shared fixtures (mock MolitClient, in-memory SQLite DB)
+- [ ] `tests/test_pipeline_phase2.py` — 12 xfail stubs covering all Phase 2 requirements:
+  - `test_normalize_trade_deal_amount`, `test_normalize_trade_exclu_use_ar`, `test_normalize_trade_deal_month_padding`
+  - `test_normalize_rent_deposit`, `test_aggregate_monthly_grouping`, `test_aggregate_monthly_stats`, `test_month_range_bounds`
+  - `test_upsert_apartment_new`, `test_upsert_apartment_idempotent`, `test_insert_monthly_prices_no_dup`
+  - `test_upsert_building_info`, `test_upsert_building_info_replace`
+- [ ] `pipeline/collectors/__init__.py` — package marker
+- [ ] `pipeline/processors/__init__.py` — package marker
 
-*Wave 0 creates test stubs before main implementation waves.*
+*Wave 0 (Plan 02-01) creates all test stubs before implementation waves.*
 
 ---
 
