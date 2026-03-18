@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - SQLite 스키마, MOLIT API 클라이언트, 지역 설정, 멱등성 로그 (completed 2026-03-17)
 - [x] **Phase 2: MOLIT Data Collection** - 매매/전세 실거래가 + 건물정보 전체 수집 및 적재 (completed 2026-03-17)
-- [ ] **Phase 3: Geospatial + Subway Graph** - Naver Maps 도보거리 + BFS 정거장 수 계산
+- [ ] **Phase 3: Geospatial + Subway Graph** - TMAP 도보거리 + networkx BFS 정거장 수 계산
 - [ ] **Phase 4: CLI + Analysis Views** - Typer CLI, 오케스트레이터, 전세가율 VIEW, CSV 내보내기
 
 ## Phase Details
@@ -61,10 +61,16 @@ Plans:
 **Requirements**: SUBW-01, SUBW-02, SUBW-03, COMM-01, COMM-02, COMM-03, COMM-04, COMM-05
 **Success Criteria** (what must be TRUE):
   1. `SELECT * FROM subway_distances WHERE apartment_id = ?` 가 해당 아파트의 호선별 도보거리(m) 또는 NULL(1km 초과)을 반환한다
-  2. 동일 아파트를 다시 수집해도 Naver API를 재호출하지 않고 캐시에서 반환된다
+  2. 동일 아파트를 다시 수집해도 TMAP API를 재호출하지 않고 캐시에서 반환된다
   3. `SELECT stops_to_gbd, stops_to_cbd, stops_to_ybd FROM commute_stops WHERE apartment_id = ?` 가 환승 포함 최단 정거장 수를 반환한다
   4. BFS 그래프가 서울 GTFS 기반으로 GTX-A 포함 전국 지하철 노선을 커버한다
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Test scaffold + schema migration (lat/lon) + module stubs (Wave 0)
+- [ ] 03-02-PLAN.md — TMAP client + haversine + subway graph builder + BFS min_stops (Wave 1)
+- [ ] 03-03-PLAN.md — Kakao geocoding client + geocode_all_apartments + stations.xlsx download (Wave 1, parallel, has checkpoint)
+- [ ] 03-04-PLAN.md — subway_distances collector + commute_stops BFS collector (Wave 2)
 
 ### Phase 4: CLI + Analysis Views
 **Goal**: 사용자가 CLI 한 줄로 수집·내보내기·상태 확인을 할 수 있고, pandas로 즉시 분석 가능한 SQLite VIEW가 존재한다
@@ -86,5 +92,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-17 |
 | 2. MOLIT Data Collection | 5/5 | Complete    | 2026-03-17 |
-| 3. Geospatial + Subway Graph | 0/TBD | Not started | - |
+| 3. Geospatial + Subway Graph | 0/4 | Not started | - |
 | 4. CLI + Analysis Views | 0/TBD | Not started | - |
