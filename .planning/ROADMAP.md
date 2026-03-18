@@ -16,6 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: MOLIT Data Collection** - 매매/전세 실거래가 + 건물정보 전체 수집 및 적재 (completed 2026-03-17)
 - [ ] **Phase 3: Geospatial + Subway Graph** - TMAP 도보거리 + networkx BFS 정거장 수 계산
 - [x] **Phase 4: CLI + Analysis Views** - Typer CLI, 오케스트레이터, 전세가율 VIEW, CSV 내보내기 (completed 2026-03-18)
+- [ ] **Phase 5: Subway Pipeline Fixes** - CLI 지오코딩 누락 수정, subway_distances UNIQUE 제약조건 수정, Phase 3 검증
 
 ## Phase Details
 
@@ -88,14 +89,30 @@ Plans:
 - [ ] 04-02-PLAN.md — apartment_analysis VIEW: create_views() in schema.py + init_db() wiring (Wave 2)
 - [ ] 04-03-PLAN.md — CLI finalization: full test suite green + human verification checkpoint (Wave 3)
 
+### Phase 5: Subway Pipeline Fixes
+**Goal**: CLI geocoding 누락과 subway_distances UNIQUE 제약조건 불일치를 수정하여, `pipeline collect --data-type all` 실행 시 지하철 거리와 출퇴근 정거장 수가 실제로 계산·저장되고, Phase 3 검증 기록이 존재한다
+**Depends on**: Phase 3, Phase 4
+**Requirements**: SUBW-01, SUBW-02, SUBW-03, COMM-05
+**Gap Closure**: Closes gaps from v1.0 milestone audit
+**Success Criteria** (what must be TRUE):
+  1. `pipeline collect --data-type geocode` 실행 시 apartments.latitude/longitude가 채워진다
+  2. `pipeline collect --data-type subway` 실행 시 `subway_distances`에 호선별로 분리된 행이 저장된다 (강남 → 2호선 + 분당선 각 1행)
+  3. `pipeline collect --data-type all` 실행 후 `commute_stops` 에 BFS 결과가 적재된다
+  4. Phase 3 VERIFICATION.md가 존재하고 status: passed이다
+**Plans**: 1 plan (gap_closure)
+
+Plans:
+- [ ] 05-01-PLAN.md — geocoding CLI dispatch + UNIQUE constraint fix + Phase 3 verification
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-17 |
 | 2. MOLIT Data Collection | 5/5 | Complete    | 2026-03-17 |
-| 3. Geospatial + Subway Graph | 3/4 | In Progress|  |
-| 4. CLI + Analysis Views | 3/3 | Complete   | 2026-03-18 |
+| 3. Geospatial + Subway Graph | 4/4 | Complete    | 2026-03-18 |
+| 4. CLI + Analysis Views | 3/3 | Complete    | 2026-03-18 |
+| 5. Subway Pipeline Fixes | 0/1 | Not started | - |
