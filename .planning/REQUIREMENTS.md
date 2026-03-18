@@ -26,9 +26,9 @@
 
 ### 지하철 거리 수집
 
-- [ ] **SUBW-01**: Naver Maps API(도보 경로)로 각 아파트에서 반경 1km 이내 지하철역 거리 수집
-- [ ] **SUBW-02**: 호선별로 분리하여 subway_distances 테이블 적재 (1km 초과 시 null)
-- [ ] **SUBW-03**: Naver API 응답 캐싱 — 동일 아파트 재요청 방지 (rate limit 1 req/sec)
+- [x] **SUBW-01**: Naver Maps API(도보 경로)로 각 아파트에서 반경 1km 이내 지하철역 거리 수집
+- [x] **SUBW-02**: 호선별로 분리하여 subway_distances 테이블 적재 (1km 초과 시 null)
+- [x] **SUBW-03**: Naver API 응답 캐싱 — 동일 아파트 재요청 방지 (rate limit 1 req/sec)
 
 ### 정거장 수 계산 (GBD/CBD/YBD)
 
@@ -36,7 +36,7 @@
 - [x] **COMM-02**: 각 아파트 최근접역에서 GBD 대표역(강남/역삼/선릉/삼성)까지 최단 정거장 수 (환승 포함)
 - [x] **COMM-03**: 각 아파트 최근접역에서 CBD 대표역(광화문/종각/을지로입구/시청)까지 최단 정거장 수 (환승 포함)
 - [x] **COMM-04**: 각 아파트 최근접역에서 YBD 대표역(여의도/국회의사당/여의나루)까지 최단 정거장 수 (환승 포함)
-- [ ] **COMM-05**: commute_stops 테이블에 업무지구별 최단값 적재
+- [x] **COMM-05**: commute_stops 테이블에 업무지구별 최단값 적재
 
 ### CLI + 출력
 
@@ -83,14 +83,14 @@
 | PRICE-04 | Phase 2 | Complete |
 | BLDG-01 | Phase 2 | Complete |
 | BLDG-02 | Phase 2 | Complete |
-| SUBW-01 | Phase 5 | Pending |
-| SUBW-02 | Phase 5 | Pending |
-| SUBW-03 | Phase 5 | Pending |
+| SUBW-01 | Phase 5 | Complete |
+| SUBW-02 | Phase 5 | Complete |
+| SUBW-03 | Phase 5 | Complete |
 | COMM-01 | Phase 3 | Complete |
 | COMM-02 | Phase 3 | Complete |
 | COMM-03 | Phase 3 | Complete |
 | COMM-04 | Phase 3 | Complete |
-| COMM-05 | Phase 5 | Pending |
+| COMM-05 | Phase 5 | Complete |
 | CLI-01 | Phase 4 | Complete |
 | CLI-02 | Phase 4 | Complete |
 | CLI-03 | Phase 4 | Complete |

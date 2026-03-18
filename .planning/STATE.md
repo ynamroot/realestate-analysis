@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-03-PLAN.md — Phase 4 CLI verification human checkpoint approved. All 4 phases complete.
-last_updated: "2026-03-18T07:12:37.796Z"
+stopped_at: Completed 05-01-PLAN.md — subway UNIQUE migration + geocode CLI dispatch + Phase 3 VERIFICATION.md
+last_updated: "2026-03-18T07:58:05.506Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 16
-  completed_plans: 16
+  total_phases: 5
+  completed_phases: 5
+  total_plans: 17
+  completed_plans: 17
   percent: 25
 ---
 
@@ -64,6 +64,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 04-cli-analysis-views P01 | 5m | 2 tasks | 4 files |
 | Phase 04-cli-analysis-views P02 | 84s | 1 tasks | 1 files |
 | Phase 04-cli-analysis-views P03 | 15min | 2 tasks | 2 files |
+| Phase 05-subway-pipeline-fixes P01 | 316s | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -103,6 +104,8 @@ Recent decisions affecting current work:
 - [Phase 04-cli-analysis-views]: create_views() wired into init_db() so VIEW always exists on every DB open — no separate migration step needed
 - [Phase 04-cli-analysis-views]: DROP VIEW IF EXISTS + CREATE VIEW used (not IF NOT EXISTS) to guarantee definition stays current across schema.py edits
 - [Phase 04-cli-analysis-views]: pipeline --help/status/export all verified by human; BOM=0xEF0xBB0xBF confirmed; 22 xpass tests confirm all prior wave deliverables complete
+- [Phase 05-subway-pipeline-fixes]: _needs_subway_unique_migration() checks for 'station_name, line_name' in DDL — not just 'line_name' (which appears as column name too)
+- [Phase 05-subway-pipeline-fixes]: geocode dispatch block inserted BEFORE subway dispatch block in collect() — source order guarantees execution order
 
 ### Pending Todos
 
@@ -117,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T07:03:25.335Z
-Stopped at: Completed 04-03-PLAN.md — Phase 4 CLI verification human checkpoint approved. All 4 phases complete.
+Last session: 2026-03-18T07:58:05.501Z
+Stopped at: Completed 05-01-PLAN.md — subway UNIQUE migration + geocode CLI dispatch + Phase 3 VERIFICATION.md
 Resume file: None

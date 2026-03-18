@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: MOLIT Data Collection** - 매매/전세 실거래가 + 건물정보 전체 수집 및 적재 (completed 2026-03-17)
 - [ ] **Phase 3: Geospatial + Subway Graph** - TMAP 도보거리 + networkx BFS 정거장 수 계산
 - [x] **Phase 4: CLI + Analysis Views** - Typer CLI, 오케스트레이터, 전세가율 VIEW, CSV 내보내기 (completed 2026-03-18)
-- [ ] **Phase 5: Subway Pipeline Fixes** - CLI 지오코딩 누락 수정, subway_distances UNIQUE 제약조건 수정, Phase 3 검증
+- [x] **Phase 5: Subway Pipeline Fixes** - CLI 지오코딩 누락 수정, subway_distances UNIQUE 제약조건 수정, Phase 3 검증 (completed 2026-03-18)
 
 ## Phase Details
 
@@ -115,4 +115,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. MOLIT Data Collection | 5/5 | Complete    | 2026-03-17 |
 | 3. Geospatial + Subway Graph | 4/4 | Complete    | 2026-03-18 |
 | 4. CLI + Analysis Views | 3/3 | Complete    | 2026-03-18 |
-| 5. Subway Pipeline Fixes | 0/1 | Not started | - |
+| 5. Subway Pipeline Fixes | 1/1 | Complete   | 2026-03-18 |
