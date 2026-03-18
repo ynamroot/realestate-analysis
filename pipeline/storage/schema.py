@@ -117,6 +117,7 @@ def init_db(db_path: str = DB_PATH) -> sqlite3.Connection:
             ON collection_log(lawd_cd, deal_ym, data_type);
     """)
     conn.commit()
+    create_views(conn)
     return conn
 
 
@@ -128,3 +129,107 @@ def migrate_db(conn: sqlite3.Connection) -> None:
             conn.commit()
         except Exception:
             pass  # Column already exists — ALTER TABLE fails silently
+
+
+def create_views(conn: sqlite3.Connection) -> None:
+    """
+    Create analysis views. Safe to call multiple times.
+    Uses DROP VIEW IF EXISTS + CREATE VIEW to ensure the definition stays current.
+    Called automatically by init_db().
+
+    apartment_analysis VIEW columns:
+        apartment_id, lawd_cd, apt_nm, umd_nm, build_year, total_households,
+        latitude, longitude,
+        latest_trade_ym, latest_trade_price_avg, latest_trade_price_min,
+        latest_trade_price_max, latest_trade_deal_count,
+        latest_rent_ym, latest_rent_deposit_avg,
+        jeonse_ratio_pct,
+        nearest_station, stops_to_gbd, stops_to_cbd, stops_to_ybd
+    """
+    conn.executescript("""
+        DROP VIEW IF EXISTS apartment_analysis;
+
+        CREATE VIEW apartment_analysis AS
+        SELECT
+            a.id                        AS apartment_id,
+            a.lawd_cd,
+            a.apt_nm,
+            a.umd_nm,
+            a.build_year,
+            a.total_households,
+            a.latitude,
+            a.longitude,
+
+            -- 최신 매매가 집계 (trade): pre-aggregate across size bands to prevent duplicate rows
+            t_agg.deal_ym               AS latest_trade_ym,
+            t_agg.price_avg             AS latest_trade_price_avg,
+            t_agg.price_min             AS latest_trade_price_min,
+            t_agg.price_max             AS latest_trade_price_max,
+            t_agg.deal_count            AS latest_trade_deal_count,
+
+            -- 최신 전세가 집계 (rent): same pattern
+            r_agg.deal_ym               AS latest_rent_ym,
+            r_agg.deposit_avg           AS latest_rent_deposit_avg,
+
+            -- 전세가율 (%): deposit_avg / trade price_avg * 100, NULL-safe
+            CASE
+                WHEN t_agg.price_avg IS NOT NULL
+                     AND t_agg.price_avg > 0
+                     AND r_agg.deposit_avg IS NOT NULL
+                THEN ROUND(
+                         CAST(r_agg.deposit_avg AS REAL) / t_agg.price_avg * 100,
+                         1
+                     )
+                ELSE NULL
+            END                         AS jeonse_ratio_pct,
+
+            -- 업무지구 접근성
+            cs.nearest_station,
+            cs.stops_to_gbd,
+            cs.stops_to_cbd,
+            cs.stops_to_ybd
+
+        FROM apartments a
+
+        -- Latest trade month: pre-aggregate size bands for that month
+        LEFT JOIN (
+            SELECT
+                apartment_id,
+                deal_ym,
+                AVG(price_avg)   AS price_avg,
+                MIN(price_min)   AS price_min,
+                MAX(price_max)   AS price_max,
+                SUM(deal_count)  AS deal_count
+            FROM monthly_prices
+            WHERE deal_type = 'trade'
+            GROUP BY apartment_id, deal_ym
+        ) t_agg
+            ON  t_agg.apartment_id = a.id
+            AND t_agg.deal_ym = (
+                    SELECT MAX(deal_ym)
+                    FROM monthly_prices
+                    WHERE apartment_id = a.id
+                      AND deal_type = 'trade'
+                )
+
+        -- Latest rent month: same pre-aggregate pattern
+        LEFT JOIN (
+            SELECT
+                apartment_id,
+                deal_ym,
+                AVG(deposit_avg) AS deposit_avg
+            FROM monthly_prices
+            WHERE deal_type = 'rent'
+            GROUP BY apartment_id, deal_ym
+        ) r_agg
+            ON  r_agg.apartment_id = a.id
+            AND r_agg.deal_ym = (
+                    SELECT MAX(deal_ym)
+                    FROM monthly_prices
+                    WHERE apartment_id = a.id
+                      AND deal_type = 'rent'
+                )
+
+        LEFT JOIN commute_stops cs ON cs.apartment_id = a.id;
+    """)
+    conn.commit()
