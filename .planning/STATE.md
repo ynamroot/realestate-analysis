@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Completed 03-04-PLAN.md — subway distances collector + commute stops BFS collector. Phase 3 complete.
-last_updated: "2026-03-18T05:19:54Z"
-last_activity: 2026-03-18 — Phase 3 complete (all 4 plans done, 10/10 tests pass)
+status: planning
+stopped_at: Completed 04-01-PLAN.md — CLI scaffold and test stubs. Phase 4 Plan 01 complete.
+last_updated: "2026-03-18T05:55:58.364Z"
+last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
-  completed_phases: 2
-  total_plans: 13
-  completed_plans: 12
+  completed_phases: 3
+  total_plans: 16
+  completed_plans: 14
   percent: 25
 ---
 
@@ -61,6 +61,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02-molit-data-collection P05 | 59s | 1 tasks | 1 files |
 | Phase 03-geospatial-subway-graph P01 | 2m 13s | 2 tasks | 7 files |
 | Phase 03-geospatial-subway-graph P02 | 116s | 2 tasks | 2 files |
+| Phase 04-cli-analysis-views P01 | 5m | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -95,6 +96,8 @@ Recent decisions affecting current work:
 - [Phase 03-geospatial-subway-graph]: tmap_walk_distance_from_response iterates SP feature — not features[0] directly
 - [Phase 03-geospatial-subway-graph]: Compound node key '{station_name}_{line_name}' prevents transfer-aware BFS collapse
 - [Phase 03-geospatial-subway-graph]: Transfer edges weight=0; min_stops uses nx.shortest_path_length with Dijkstra
+- [Phase 04-cli-analysis-views]: typer.Exit(1) raises click.exceptions.Exit, not SystemExit — test catches both
+- [Phase 04-cli-analysis-views]: 4 CLI-04 create_views tests intentionally fail with ImportError until Plan 02 ships
 
 ### Pending Todos
 
@@ -109,6 +112,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T05:19:54Z
-Stopped at: Completed 03-04-PLAN.md — Phase 3 fully complete. Next: Phase 4.
+Last session: 2026-03-18T05:55:58.358Z
+Stopped at: Completed 04-01-PLAN.md — CLI scaffold and test stubs. Phase 4 Plan 01 complete.
 Resume file: None

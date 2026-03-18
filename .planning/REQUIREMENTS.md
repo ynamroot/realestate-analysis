@@ -40,10 +40,10 @@
 
 ### CLI + 출력
 
-- [ ] **CLI-01**: Typer 기반 CLI — `collect`, `export`, `status` 서브커맨드
-- [ ] **CLI-02**: 수집 대상(지역, 기간, 데이터 유형) 옵션 선택 가능
-- [ ] **CLI-03**: pandas `read_sql()` + `to_csv(encoding='utf-8-sig')` 엑셀 호환 CSV 내보내기
-- [ ] **CLI-04**: 분석용 SQLite VIEW — 아파트별 최신 시세, 전세가율, 업무지구 접근성 통합 뷰
+- [x] **CLI-01**: Typer 기반 CLI — `collect`, `export`, `status` 서브커맨드
+- [x] **CLI-02**: 수집 대상(지역, 기간, 데이터 유형) 옵션 선택 가능
+- [x] **CLI-03**: pandas `read_sql()` + `to_csv(encoding='utf-8-sig')` 엑셀 호환 CSV 내보내기
+- [x] **CLI-04**: 분석용 SQLite VIEW — 아파트별 최신 시세, 전세가율, 업무지구 접근성 통합 뷰
 
 ## v2 Requirements
 
@@ -91,10 +91,10 @@
 | COMM-03 | Phase 3 | Complete |
 | COMM-04 | Phase 3 | Complete |
 | COMM-05 | Phase 3 | Complete |
-| CLI-01 | Phase 4 | Pending |
-| CLI-02 | Phase 4 | Pending |
-| CLI-03 | Phase 4 | Pending |
-| CLI-04 | Phase 4 | Pending |
+| CLI-01 | Phase 4 | Complete |
+| CLI-02 | Phase 4 | Complete |
+| CLI-03 | Phase 4 | Complete |
+| CLI-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 22 total
