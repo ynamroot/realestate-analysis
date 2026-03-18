@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: "Checkpoint: 03-03 Task 2 — waiting for manual stations.xlsx download from data.go.kr/15013205"
-last_updated: "2026-03-18T03:02:11.982Z"
+stopped_at: Completed 03-02-PLAN.md — TMAP client and subway graph builder
+last_updated: "2026-03-18T03:03:40.000Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 13
-  completed_plans: 11
+  completed_plans: 12
   percent: 25
 ---
 
@@ -60,6 +60,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02-molit-data-collection P04 | 3min | 1 tasks | 1 files |
 | Phase 02-molit-data-collection P05 | 59s | 1 tasks | 1 files |
 | Phase 03-geospatial-subway-graph P01 | 2m 13s | 2 tasks | 7 files |
+| Phase 03-geospatial-subway-graph P02 | 116s | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,9 @@ Recent decisions affecting current work:
 - [Phase 02-molit-data-collection]: buldNm name matching uses exact normalized match + prefix fallback; unmatched complexes inserted as new apartments
 - [Phase 03-geospatial-subway-graph]: build_subway_graph_from_df() added to stub to match DataFrame-based test contract for Wave 1
 - [Phase 03-geospatial-subway-graph]: migrate_db() uses silent exception handling for idempotent ALTER TABLE column additions
+- [Phase 03-geospatial-subway-graph]: tmap_walk_distance_from_response iterates SP feature — not features[0] directly
+- [Phase 03-geospatial-subway-graph]: Compound node key '{station_name}_{line_name}' prevents transfer-aware BFS collapse
+- [Phase 03-geospatial-subway-graph]: Transfer edges weight=0; min_stops uses nx.shortest_path_length with Dijkstra
 
 ### Pending Todos
 
@@ -105,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T03:02:11.973Z
-Stopped at: Checkpoint: 03-03 Task 2 — waiting for manual stations.xlsx download from data.go.kr/15013205
+Last session: 2026-03-18T03:03:39.995Z
+Stopped at: Completed 03-02-PLAN.md — TMAP client and subway graph builder
 Resume file: None
