@@ -117,6 +117,7 @@ def init_db(db_path: str = DB_PATH) -> sqlite3.Connection:
             ON collection_log(lawd_cd, deal_ym, data_type);
     """)
     conn.commit()
+    migrate_db(conn)
     create_views(conn)
     return conn
 

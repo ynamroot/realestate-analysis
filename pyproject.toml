@@ -19,8 +19,6 @@ dependencies = [
 requires-python = ">=3.8"
 
 [project.scripts]
-start = "uvicorn app.main:app --host 0.0.0.0 --port 8000"
-dev = "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
 pipeline = "pipeline.cli.main:app"
 
 [build-system]
