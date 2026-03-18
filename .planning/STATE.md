@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 03-02-PLAN.md — TMAP client and subway graph builder
-last_updated: "2026-03-18T03:03:40.000Z"
-last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
+status: in_progress
+stopped_at: Completed 03-04-PLAN.md — subway distances collector + commute stops BFS collector. Phase 3 complete.
+last_updated: "2026-03-18T05:19:54Z"
+last_activity: 2026-03-18 — Phase 3 complete (all 4 plans done, 10/10 tests pass)
 progress:
   total_phases: 4
   completed_phases: 2
@@ -109,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T03:03:39.995Z
-Stopped at: Completed 03-02-PLAN.md — TMAP client and subway graph builder
+Last session: 2026-03-18T05:19:54Z
+Stopped at: Completed 03-04-PLAN.md — Phase 3 fully complete. Next: Phase 4.
 Resume file: None
