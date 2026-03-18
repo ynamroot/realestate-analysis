@@ -98,4 +98,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation | 4/4 | Complete    | 2026-03-17 |
 | 2. MOLIT Data Collection | 5/5 | Complete    | 2026-03-17 |
 | 3. Geospatial + Subway Graph | 3/4 | In Progress|  |
-| 4. CLI + Analysis Views | 1/3 | In Progress|  |
+| 4. CLI + Analysis Views | 2/3 | In Progress|  |

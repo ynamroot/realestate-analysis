@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-01-PLAN.md — CLI scaffold and test stubs. Phase 4 Plan 01 complete.
-last_updated: "2026-03-18T05:55:58.364Z"
+stopped_at: Completed 04-02-PLAN.md — apartment_analysis VIEW added to schema.py. Phase 4 Plan 02 complete.
+last_updated: "2026-03-18T05:59:05.160Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 16
-  completed_plans: 14
+  completed_plans: 15
   percent: 25
 ---
 
@@ -62,6 +62,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 03-geospatial-subway-graph P01 | 2m 13s | 2 tasks | 7 files |
 | Phase 03-geospatial-subway-graph P02 | 116s | 2 tasks | 2 files |
 | Phase 04-cli-analysis-views P01 | 5m | 2 tasks | 4 files |
+| Phase 04-cli-analysis-views P02 | 84s | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,8 @@ Recent decisions affecting current work:
 - [Phase 03-geospatial-subway-graph]: Transfer edges weight=0; min_stops uses nx.shortest_path_length with Dijkstra
 - [Phase 04-cli-analysis-views]: typer.Exit(1) raises click.exceptions.Exit, not SystemExit — test catches both
 - [Phase 04-cli-analysis-views]: 4 CLI-04 create_views tests intentionally fail with ImportError until Plan 02 ships
+- [Phase 04-cli-analysis-views]: create_views() wired into init_db() so VIEW always exists on every DB open — no separate migration step needed
+- [Phase 04-cli-analysis-views]: DROP VIEW IF EXISTS + CREATE VIEW used (not IF NOT EXISTS) to guarantee definition stays current across schema.py edits
 
 ### Pending Todos
 
@@ -112,6 +115,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T05:55:58.358Z
-Stopped at: Completed 04-01-PLAN.md — CLI scaffold and test stubs. Phase 4 Plan 01 complete.
+Last session: 2026-03-18T05:59:05.154Z
+Stopped at: Completed 04-02-PLAN.md — apartment_analysis VIEW added to schema.py. Phase 4 Plan 02 complete.
 Resume file: None
