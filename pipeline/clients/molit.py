@@ -16,6 +16,7 @@ Source: realestate_csv.py fetch_trades() (serviceKey pattern from line 362)
 """
 from __future__ import annotations
 
+import base64
 import xml.etree.ElementTree as ET
 from urllib.parse import unquote, quote
 
@@ -41,6 +42,7 @@ class MolitClient:
         # Pre-encode: decode any existing URL encoding, then re-encode unsafe chars.
         # CRITICAL: do NOT pass serviceKey via params={} — httpx will double-encode it.
         # This pattern is taken verbatim from realestate_csv.py line 362.
+        # NOTE: API key contains Base64-like chars (+, /) but those are literal characters, not encoding
         self.safe_key = quote(unquote(raw_api_key), safe="")
 
     async def fetch_all(

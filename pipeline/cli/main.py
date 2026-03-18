@@ -68,10 +68,32 @@ def collect(
 
     if data_type in ("trade", "rent", "all") and molit_key:
         from pipeline.collectors.trade_rent import collect_all_regions as _collect_trade
+        from pipeline.collectors.trade_rent import collect_district
         from pipeline.clients.molit import MolitClient
+        from pipeline.processors.normalizer import get_month_range
+        import httpx
+
         molit = MolitClient(molit_key)
-        result = _collect_trade(conn, molit, start_ym=start)
-        typer.echo(f"Trade/rent: {result}")
+
+        # Only collect specified data types (not both always)
+        if data_type == "all":
+            result = _collect_trade(conn, molit, start_ym=start)
+            typer.echo(f"Trade/rent: {result}")
+        else:
+            # Collect only the specified data_type (trade or rent)
+            months = get_month_range(start)
+            summary = {"trade": 0, "rent": 0}
+
+            async def _collect_single():
+                async with httpx.AsyncClient() as client:
+                    for name, lawd_cd in regions.items():
+                        typer.echo(f"Collecting {name} ({lawd_cd}) — {len(months)} months × {data_type}")
+                        n = await collect_district(conn, client, molit, lawd_cd, months, data_type)
+                        summary[data_type] += n
+
+            import asyncio
+            asyncio.run(_collect_single())
+            typer.echo(f"{data_type.capitalize()}: {summary[data_type]} rows")
 
     if data_type in ("building", "all") and molit_key:
         from pipeline.collectors.building_info import collect_all_building_info

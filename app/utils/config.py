@@ -8,31 +8,34 @@ from typing import Optional
 
 class Settings(BaseSettings):
     """애플리케이션 설정"""
-    
-    # 서버 설정  
+
+    # 서버 설정
     port: int = int(os.getenv("PORT", 8000))  # Railway 동적 포트 지원
     host: str = "0.0.0.0"
     environment: str = "development"
-    
+
     # 에이전트 설정
     agent_id: str = "agent-py-001"
     agent_name: str = "A2A_Python_Agent"
-    
+
     # 로깅 설정
     log_level: str = "INFO"
-    
+
     # 기타 설정
     request_timeout: int = 30
     max_connections: int = 100
-    
+
     # 부동산 API 설정
     molit_api_key: Optional[str] = None
     naver_client_id: Optional[str] = None
     naver_client_secret: Optional[str] = None
-    
+    kakao_rest_api_key: Optional[str] = None
+    tmap_api_key: Optional[str] = None
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "ignore"
 
 
 # 전역 설정 인스턴스
