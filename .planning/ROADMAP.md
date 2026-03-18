@@ -81,7 +81,12 @@ Plans:
   2. `pipeline export --output output.csv` 명령이 Excel에서 한글이 깨지지 않는 utf-8-sig CSV를 생성한다
   3. `pipeline status` 명령이 각 지역별 마지막 수집 월과 레코드 수를 출력한다
   4. `SELECT * FROM apartment_analysis` VIEW가 아파트별 최신 시세, 전세가율, 업무지구 접근성을 통합 반환한다
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Test scaffold (12 stubs) + CLI package stub with 3 @app.command() stubs (Wave 1)
+- [ ] 04-02-PLAN.md — apartment_analysis VIEW: create_views() in schema.py + init_db() wiring (Wave 2)
+- [ ] 04-03-PLAN.md — CLI finalization: full test suite green + human verification checkpoint (Wave 3)
 
 ## Progress
 
@@ -93,4 +98,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation | 4/4 | Complete    | 2026-03-17 |
 | 2. MOLIT Data Collection | 5/5 | Complete    | 2026-03-17 |
 | 3. Geospatial + Subway Graph | 3/4 | In Progress|  |
-| 4. CLI + Analysis Views | 0/TBD | Not started | - |
+| 4. CLI + Analysis Views | 0/3 | Not started | - |
