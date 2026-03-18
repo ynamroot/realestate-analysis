@@ -34,6 +34,8 @@ def init_db(db_path: str = DB_PATH) -> sqlite3.Connection:
             umd_nm TEXT,
             jibun TEXT,
             road_nm TEXT,
+            latitude REAL,
+            longitude REAL,
             build_year INTEGER,
             total_households INTEGER,
             floor_area_ratio REAL,
@@ -116,3 +118,13 @@ def init_db(db_path: str = DB_PATH) -> sqlite3.Connection:
     """)
     conn.commit()
     return conn
+
+
+def migrate_db(conn: sqlite3.Connection) -> None:
+    """Add columns introduced after initial schema creation. Safe to call multiple times."""
+    for col, typedef in [("latitude", "REAL"), ("longitude", "REAL")]:
+        try:
+            conn.execute(f"ALTER TABLE apartments ADD COLUMN {col} {typedef}")
+            conn.commit()
+        except Exception:
+            pass  # Column already exists — ALTER TABLE fails silently

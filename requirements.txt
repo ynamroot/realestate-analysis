@@ -17,3 +17,4 @@ python-multipart>=0.0.6
 dnspython>=2.7.0
 attrs>=22.2.0
 jsonschema>=4.20.0
+networkx>=3.0
