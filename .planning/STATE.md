@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-05-PLAN.md — HouseInfo building info collector
-last_updated: "2026-03-17T23:55:57.864Z"
+stopped_at: Completed 03-01-PLAN.md — Phase 3 Wave 0 TDD scaffold
+last_updated: "2026-03-18T02:59:49.543Z"
 last_activity: 2026-03-17 — Roadmap created, ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 9
-  completed_plans: 9
+  total_plans: 13
+  completed_plans: 10
   percent: 25
 ---
 
@@ -59,6 +59,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02-molit-data-collection P03 | 2m | 1 tasks | 1 files |
 | Phase 02-molit-data-collection P04 | 3min | 1 tasks | 1 files |
 | Phase 02-molit-data-collection P05 | 59s | 1 tasks | 1 files |
+| Phase 03-geospatial-subway-graph P01 | 2m 13s | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,8 @@ Recent decisions affecting current work:
 - [Phase 02-molit-data-collection]: collect_all_regions uses asyncio.run() for sync CLI entry point — not suitable for calling from within an async context
 - [Phase 02-molit-data-collection]: HouseInfo endpoint URL embeds serviceKey directly (same pattern as MolitClient) to avoid httpx double-encoding
 - [Phase 02-molit-data-collection]: buldNm name matching uses exact normalized match + prefix fallback; unmatched complexes inserted as new apartments
+- [Phase 03-geospatial-subway-graph]: build_subway_graph_from_df() added to stub to match DataFrame-based test contract for Wave 1
+- [Phase 03-geospatial-subway-graph]: migrate_db() uses silent exception handling for idempotent ALTER TABLE column additions
 
 ### Pending Todos
 
@@ -102,6 +105,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T23:23:01.979Z
-Stopped at: Completed 02-05-PLAN.md — HouseInfo building info collector
+Last session: 2026-03-18T02:59:49.538Z
+Stopped at: Completed 03-01-PLAN.md — Phase 3 Wave 0 TDD scaffold
 Resume file: None
