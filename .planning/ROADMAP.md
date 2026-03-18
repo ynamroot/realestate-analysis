@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - SQLite 스키마, MOLIT API 클라이언트, 지역 설정, 멱등성 로그 (completed 2026-03-17)
 - [x] **Phase 2: MOLIT Data Collection** - 매매/전세 실거래가 + 건물정보 전체 수집 및 적재 (completed 2026-03-17)
 - [ ] **Phase 3: Geospatial + Subway Graph** - TMAP 도보거리 + networkx BFS 정거장 수 계산
-- [ ] **Phase 4: CLI + Analysis Views** - Typer CLI, 오케스트레이터, 전세가율 VIEW, CSV 내보내기
+- [x] **Phase 4: CLI + Analysis Views** - Typer CLI, 오케스트레이터, 전세가율 VIEW, CSV 내보내기 (completed 2026-03-18)
 
 ## Phase Details
 
@@ -98,4 +98,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation | 4/4 | Complete    | 2026-03-17 |
 | 2. MOLIT Data Collection | 5/5 | Complete    | 2026-03-17 |
 | 3. Geospatial + Subway Graph | 3/4 | In Progress|  |
-| 4. CLI + Analysis Views | 2/3 | In Progress|  |
+| 4. CLI + Analysis Views | 3/3 | Complete   | 2026-03-18 |
