@@ -122,6 +122,19 @@ def init_db(db_path: str = DB_PATH) -> sqlite3.Connection:
     return conn
 
 
+def _needs_subway_unique_migration(conn: sqlite3.Connection) -> bool:
+    """Return True if subway_distances still has the old 2-column UNIQUE constraint."""
+    row = conn.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='subway_distances'"
+    ).fetchone()
+    if row is None:
+        return False  # Table doesn't exist yet — CREATE TABLE handles it
+    ddl: str = row[0]
+    # Old: UNIQUE(apartment_id, station_name)  New: UNIQUE(apartment_id, station_name, line_name)
+    # Check specifically for line_name inside the UNIQUE(...) constraint, not just as a column name
+    return "station_name, line_name" not in ddl
+
+
 def migrate_db(conn: sqlite3.Connection) -> None:
     """Add columns introduced after initial schema creation. Safe to call multiple times."""
     for col, typedef in [("latitude", "REAL"), ("longitude", "REAL")]:
@@ -130,6 +143,28 @@ def migrate_db(conn: sqlite3.Connection) -> None:
             conn.commit()
         except Exception:
             pass  # Column already exists — ALTER TABLE fails silently
+
+    # Fix subway_distances UNIQUE: (apartment_id, station_name) → (apartment_id, station_name, line_name)
+    if _needs_subway_unique_migration(conn):
+        conn.executescript("""
+            BEGIN;
+            CREATE TABLE IF NOT EXISTS subway_distances_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                apartment_id INTEGER NOT NULL REFERENCES apartments(id),
+                station_name TEXT NOT NULL,
+                line_name TEXT,
+                walk_distance_m INTEGER,
+                fetched_at TEXT DEFAULT (datetime('now')),
+                UNIQUE(apartment_id, station_name, line_name)
+            );
+            INSERT OR IGNORE INTO subway_distances_new
+                (id, apartment_id, station_name, line_name, walk_distance_m, fetched_at)
+            SELECT id, apartment_id, station_name, line_name, walk_distance_m, fetched_at
+            FROM subway_distances;
+            DROP TABLE subway_distances;
+            ALTER TABLE subway_distances_new RENAME TO subway_distances;
+            COMMIT;
+        """)
 
 
 def create_views(conn: sqlite3.Connection) -> None:

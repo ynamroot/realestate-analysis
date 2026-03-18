@@ -51,7 +51,7 @@ def collect(
     ),
     start: str = typer.Option("200601", help="수집 시작 월 YYYYMM (기본값: 200601)"),
     data_type: str = typer.Option(
-        "all", help="trade | rent | building | subway | all (기본값: all)"
+        "all", help="trade | rent | building | geocode | subway | all (기본값: all)"
     ),
 ) -> None:
     """아파트 실거래가 + 건물정보 + 지하철 거리 수집"""
@@ -79,6 +79,21 @@ def collect(
         molit = MolitClient(molit_key)
         result = collect_all_building_info(conn, molit)
         typer.echo(f"Building: {result}")
+
+    if data_type in ("geocode", "subway", "all"):
+        kakao_key = os.getenv("KAKAO_REST_API_KEY")
+        if not kakao_key:
+            typer.echo("KAKAO_REST_API_KEY not set — geocoding skipped.", err=True)
+            if data_type in ("subway", "all"):
+                typer.echo(
+                    "WARNING: subway collection will process 0 apartments because "
+                    "no coordinates are set. Set KAKAO_REST_API_KEY and run geocode first.",
+                    err=True,
+                )
+        else:
+            from pipeline.collectors.geocode import geocode_all_apartments
+            result = geocode_all_apartments(conn)
+            typer.echo(f"Geocoding: {result}")
 
     if data_type in ("subway", "all"):
         tmap_key = os.getenv("TMAP_APP_KEY")
